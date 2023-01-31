@@ -11,5 +11,3 @@ class Student < Person
   end
 end
 
-student = Student.new('A', 'yonas', 2)
-puts student.can_use_services?
