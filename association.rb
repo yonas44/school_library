@@ -1,6 +1,5 @@
 class Classroom
-  attr_reader :students
-  attr_accessor :label
+  attr_accessor :label, :students
 
   def initialize(label)
     @label = label
@@ -14,8 +13,7 @@ class Classroom
 end
 
 class Rental
-  attr_reader :person, :book
-  attr_accessor :date
+  attr_accessor :date, :person, :book
 
   def initialize(person, book, date)
     @person = person
@@ -35,7 +33,8 @@ class Book
     @rentals = []
   end
 
-  def add_rental(rental)
+  def add_rental(person, date)
+    rental = Rental.new(person, self, date)
     @rentals.push(rental) unless @rentals.include?(rental)
   end
 end

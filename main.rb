@@ -2,8 +2,8 @@ require_relative './nameable'
 require_relative './association'
 
 class Person < Nameable
-  attr_reader :id, :rentals
-  attr_accessor :name, :age, :parent_permission
+  attr_reader :id
+  attr_accessor :name, :age, :parent_permission, :rentals
 
   def initialize(name, age, parent_permission)
     super()
@@ -32,7 +32,8 @@ class Person < Nameable
     @name
   end
 
-  def add_rental(rental)
+  def add_rental(book, date)
+    rental = Rental.new(self, book, date)
     @rentals.push(rental) unless @rentals.include?(rental)
   end
 end
