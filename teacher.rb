@@ -1,4 +1,4 @@
-require_relative './main'
+require_relative './person'
 require_relative './student'
 
 class Teacher < Person
