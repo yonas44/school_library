@@ -26,7 +26,7 @@
 
 # 📖 Enumerable <a name="about-project"></a>
 
-In this repo I build a school library app using Ruby following `Object Oriented Programming` principles.
+In this repo we built a school library app using Ruby following `Object Oriented Programming` principles, that can be accessed in the terminal.
 
 ## 🛠 Built With <a name="built-with"></a>
 
