@@ -31,17 +31,12 @@ class App
     return puts 'There are no people, currently' if @all_people.empty?
 
     @all_people.each do |person|
-      if defined?(person.specialization)
-        return puts "[Teacher] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
-      end
-
-      puts "[Student] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+      puts "[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
     end
   end
 
   def create_person
-    print 'Do you want to create a Student (1) or a teacher (2)? [Enter a number]: '
-    num = gets.chomp
+    num = ask_question('Do you want to create a Student (1) or a teacher (2)? [Enter a number]: ')
     case num
     when '1'
       create_student
@@ -53,17 +48,11 @@ class App
   end
 
   def create_student
-    permission = nil
-    print 'Age: '
-    age = gets.chomp
-    print 'Name: '
-    name = gets.chomp
+    age = ask_question('Age: ')
+    name = ask_question('Name: ')
 
     # Loops until the user gives the right input [Y/N] for parent_permission
-    until %w[Y N y n].include?(permission)
-      print 'Has parent permission?: [Y/N]'
-      permission = gets.chomp
-    end
+    permission = ask_question('Has parent permission?: [Y/N]') until %w[Y N y n].include?(permission)
 
     permission = true if %w[Y y].include?(permission)
     permission = false if %w[N n].include?(permission)
