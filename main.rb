@@ -19,8 +19,7 @@ def main
       break
     elsif (1...7).include?(num.to_i)
       app.options[:"#{num}"].call
-    else
-      puts 'Please enter a valid input; Hint: try (1...7)'
+    else puts 'Please enter a valid input; Hint: try (1...7)'
     end
   end
 end
