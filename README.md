@@ -94,16 +94,22 @@ To run the project, execute the following command:
 
 ## 👥 Authors <a name="authors"></a>
 
-👤 **Author**
+👤 **Author - 1**
 
 - GitHub: [@yonas44](https://github.com/yonas44)
 - LinkedIn: [Yonas Tesfu](linkedin.com/in/yonas-tesfu)
+
+👤 **Author - 2**
+
+- GitHub: [@keebot-png](https://github.com/keebot-png)
+- Twitter: [@KeenanBotes](https://twitter.com/KeenanBotes)
+- LinkedIn: [kee.bot@icloud.com](https://www.linkedin.com/in/keenan-botes-947043160)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- [ ] Add more custom methods which have the same functionalities as Enumerables.
+- [ ] Add unit testing using Rspec
 - [ ] Use `TomDoc` to document my codes more professionally and make it more readable.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
