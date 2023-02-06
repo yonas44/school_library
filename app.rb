@@ -31,46 +31,30 @@ class App
     return puts 'There are no people, currently' if @all_people.empty?
 
     @all_people.each do |person|
-      if defined?(person.specialization)
-        return puts "[Teacher] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
-      end
-
-      puts "[Student] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+      puts "[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
     end
   end
 
   def create_person
-    print 'Do you want to create a Student (1) or a teacher (2)? [Enter a number]: '
-    num = gets.chomp
+    num = ask_question('Do you want to create a Student (1) or a teacher (2)? [Enter a number]: ')
     case num
-    when '1'
-      create_student
-    when '2'
-      create_teacher
-    else
-      puts 'Your choice is invalid, try'
+    when '1' then create_student
+    when '2' then create_teacher
+    else puts 'Your choice is invalid, try'
     end
   end
 
   def create_student
-    permission = nil
-    print 'Age: '
-    age = gets.chomp
-    print 'Name: '
-    name = gets.chomp
+    age = ask_question('Age: ')
+    name = ask_question('Name: ')
 
     # Loops until the user gives the right input [Y/N] for parent_permission
-    until %w[Y N y n].include?(permission)
-      print 'Has parent permission?: [Y/N]'
-      permission = gets.chomp
-    end
+    permission = ask_question('Has parent permission?: [Y/N]') until %w[Y N y n].include?(permission)
 
     permission = true if %w[Y y].include?(permission)
     permission = false if %w[N n].include?(permission)
 
-    puts 'Please, enter a valid input'
-
-    @all_people.push(Student.new(nil, age, name, parent_permission: permission))
+    @all_people << Student.new(nil, age, name, parent_permission: permission)
     puts 'Person created successfully'
   end
 
@@ -78,14 +62,14 @@ class App
     age = ask_question('Age: ')
     name = ask_question('Name: ')
     specialization = ask_question('Specialization: ')
-    @all_people.push(Teacher.new(specialization, age, name))
+    @all_people << Teacher.new(specialization, age, name)
     puts 'Person created successfully'
   end
 
   def create_book
     title = ask_question('Enter the title of the book: ')
     author = ask_question('Enter the author of the book: ')
-    @all_books.push(Book.new(title, author))
+    @all_books << Book.new(title, author)
     puts 'Book created successfully'
   end
 
@@ -101,16 +85,12 @@ class App
     puts 'Select a person from the following list by number (no id)'
 
     @all_people.each_with_index do |person, index|
-      if defined?(person.specialization)
-        puts "#{index}) [Teacher] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
-      else
-        puts "#{index}) [Student] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
-      end
+      puts "#{index}) [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
     end
     person_index = gets.chomp
 
     date = ask_question('Date: ')
-    @all_rentals.push(Rental.new(@all_people[person_index.to_i], @all_books[book_index.to_i], date))
+    @all_rentals << Rental.new(@all_people[person_index.to_i], @all_books[book_index.to_i], date)
     puts 'Rental created successfully'
   end
 
