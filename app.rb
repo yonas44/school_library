@@ -1,13 +1,13 @@
 require_relative './association'
 require_relative './student'
 require_relative './teacher'
+require_relative './utils'
+require 'json'
 
 class App
   attr_reader :options
 
   def initialize
-    @all_books = []
-    @all_people = []
     @all_rentals = []
 
     @options = {
@@ -22,16 +22,18 @@ class App
   end
 
   def list_books
+    @all_books = fetch_books
     return puts 'There are no books, currently' if @all_books.empty?
 
-    @all_books.each { |book| puts "Title: #{book.title}, Author: #{book.author}" }
+    @all_books.each { |book| puts "Title: #{book[:title]}, Author: #{book[:author]}" }
   end
 
   def list_people
+    @all_people = fetch_people
     return puts 'There are no people, currently' if @all_people.empty?
 
     @all_people.each do |person|
-      puts "[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+      puts "[#{person[:role]}] Name: #{person[:name]}, ID: #{person[:id]}, Age: #{person[:age]}"
     end
   end
 
@@ -54,7 +56,8 @@ class App
     permission = true if %w[Y y].include?(permission)
     permission = false if %w[N n].include?(permission)
 
-    @all_people << Student.new(nil, age, name, parent_permission: permission)
+    # @all_people << Student.new(nil, age, name, parent_permission: permission)
+    store_people(Student.new(nil, age, name, parent_permission: permission))
     puts 'Person created successfully'
   end
 
@@ -62,14 +65,16 @@ class App
     age = ask_question('Age: ')
     name = ask_question('Name: ')
     specialization = ask_question('Specialization: ')
-    @all_people << Teacher.new(specialization, age, name)
+    # @all_people << Teacher.new(specialization, age, name)
+    store_people(Teacher.new(specialization, age, name))
     puts 'Person created successfully'
   end
 
   def create_book
     title = ask_question('Enter the title of the book: ')
     author = ask_question('Enter the author of the book: ')
-    @all_books << Book.new(title, author)
+    # @all_books << Book.new(title, author)
+    store_book(Book.new(title, author))
     puts 'Book created successfully'
   end
 
