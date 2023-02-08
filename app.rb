@@ -113,7 +113,10 @@ class App
 
   def list_rentals
     @all_rentals = fetch_rentals
-    return puts "There is no rentals.json file inside the store directory, make sure it exits!" unless @all_rentals.is_a? Array
+    unless @all_rentals.is_a? Array
+      return puts 'There is no rentals.json file inside the store directory, make sure it exits!'
+    end
+
     id = ask_question('ID of person: ')
     puts 'Rentals:'
 
