@@ -1,1 +1,1 @@
-["{\"role\":\"Student\",\"name\":\"person\",\"id\":336,\"age\":\"55\",\"parent_permission\":false,\"rentals\":[]}"]
+["{\"role\":\"Teacher\",\"name\":\"keenan\",\"id\":295,\"age\":\"25\",\"parent_permission\":true,\"rentals\":[\"{\\\"author\\\":\\\"keenan\\\",\\\"book\\\":\\\"narnia\\\",\\\"date\\\":\\\"2020\\\",\\\"id\\\":295}\"]}"]
