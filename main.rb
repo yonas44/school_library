@@ -3,6 +3,7 @@ require_relative './app'
 def main
   puts 'Welcome to School Library App!'
   app = App.new
+  # File.write("./store/books.json", 'This is just a sample text', mode: 'a')
 
   loop do
     puts [' ', 'Please, choose an option by entering a number:',
