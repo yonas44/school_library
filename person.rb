@@ -14,6 +14,17 @@ class Person < Nameable
     @rentals = []
   end
 
+  def to_json(*args)
+    {
+      'role' => self.class,
+      'name' => @name,
+      'id' => @id,
+      'age' => @age,
+      'parent_permission' => @parent_permission,
+      'rentals' => @rentals
+    }.to_json(*args)
+  end
+
   private
 
   def _is_of_age?(age)

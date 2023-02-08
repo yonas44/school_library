@@ -22,6 +22,14 @@ class Rental
     person.rentals.push(self) unless person.rentals.include?(self)
     book.rentals.push(self) unless book.rentals.include?(self)
   end
+
+  def to_json(*args)
+    {
+      'person' => @person,
+      'book' => @book,
+      'date' => @date
+    }.to_json(*args)
+  end
 end
 
 class Book
@@ -31,6 +39,14 @@ class Book
     @title = title
     @author = author
     @rentals = []
+  end
+
+  def to_json(*args)
+    {
+      'title' => @title,
+      'author' => @author,
+      'rentals' => @rentals
+    }.to_json(*args)
   end
 
   def add_rental(person, date)

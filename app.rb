@@ -25,7 +25,7 @@ class App
     @all_books = fetch_books
     return puts 'There are no books, currently' if @all_books.empty?
 
-    @all_books.each { |book| puts "Title: #{book[:title]}, Author: #{book[:author]}" }
+    @all_books.each { |book| puts "Title: #{JSON.parse(book, object_class: OpenStruct).title}, Author: #{JSON.parse(book, object_class: OpenStruct).author}" }
   end
 
   def list_people
@@ -33,7 +33,7 @@ class App
     return puts 'There are no people, currently' if @all_people.empty?
 
     @all_people.each do |person|
-      puts "[#{person[:role]}] Name: #{person[:name]}, ID: #{person[:id]}, Age: #{person[:age]}"
+      puts "[#{JSON.parse(person, object_class: OpenStruct).role}] Name: #{JSON.parse(person, object_class: OpenStruct).name}, ID: #{JSON.parse(person, object_class: OpenStruct).id}, Age: #{JSON.parse(person, object_class: OpenStruct).age}"
     end
   end
 
@@ -55,8 +55,6 @@ class App
 
     permission = true if %w[Y y].include?(permission)
     permission = false if %w[N n].include?(permission)
-
-    # @all_people << Student.new(nil, age, name, parent_permission: permission)
     store_people(Student.new(nil, age, name, parent_permission: permission))
     puts 'Person created successfully'
   end
@@ -65,7 +63,6 @@ class App
     age = ask_question('Age: ')
     name = ask_question('Name: ')
     specialization = ask_question('Specialization: ')
-    # @all_people << Teacher.new(specialization, age, name)
     store_people(Teacher.new(specialization, age, name))
     puts 'Person created successfully'
   end
@@ -73,29 +70,28 @@ class App
   def create_book
     title = ask_question('Enter the title of the book: ')
     author = ask_question('Enter the author of the book: ')
-    # @all_books << Book.new(title, author)
     store_book(Book.new(title, author))
     puts 'Book created successfully'
   end
 
   def create_rental
-    if @all_books.empty? || @all_people.empty?
+    if fetch_books.empty? || fetch_people.empty?
       puts 'There are no books or people to rent, create a book and person first'
       return
     end
 
     puts 'Select a book from the following list by number'
-    @all_books.each_with_index { |book, index| puts "#{index}) Title: #{book.title}, Author: #{book.author}" }
+    fetch_books.each_with_index { |book, index| puts "#{index}) Title: #{JSON.parse(book, object_class: OpenStruct).title}, Author: #{JSON.parse(book, object_class: OpenStruct).author}" }
     book_index = gets.chomp
     puts 'Select a person from the following list by number (no id)'
 
-    @all_people.each_with_index do |person, index|
-      puts "#{index}) [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+    fetch_people.each_with_index do |person, index|
+      puts "#{index}) [#{JSON.parse(person, object_class: OpenStruct).role}] Name: #{JSON.parse(person, object_class: OpenStruct).name}, ID: #{JSON.parse(person, object_class: OpenStruct).id}, Age: #{JSON.parse(person, object_class: OpenStruct).age}"
     end
     person_index = gets.chomp
 
     date = ask_question('Date: ')
-    @all_rentals << Rental.new(@all_people[person_index.to_i], @all_books[book_index.to_i], date)
+    store_rentals(Rental.new(JSON.parse(fetch_people[person_index.to_i], object_class: OpenStruct), JSON.parse(fetch_books[book_index.to_i], object_class: OpenStruct), date))
     puts 'Rental created successfully'
   end
 
