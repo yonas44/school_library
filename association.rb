@@ -7,7 +7,7 @@ class Classroom
   end
 
   def add_student(student)
-    @students.push(student) unless @student.include?(student)
+    @students << (student) unless @students.include?(student)
     student.classroom = self
   end
 end
@@ -23,13 +23,13 @@ class Rental
     book['rentals'].push(to_json) unless book['rentals'].include?(to_json)
   end
 
-  def to_json(*args)
+  def to_json(*_args)
     {
       'author' => @book['author'],
       'book' => @book['title'],
       'date' => @date,
       'id' => @person['id']
-    }.to_json(*args)
+    }
   end
 end
 
@@ -42,16 +42,16 @@ class Book
     @rentals = []
   end
 
-  def to_json(*args)
+  def to_json(*_args)
     {
       'title' => @title,
       'author' => @author,
       'rentals' => @rentals
-    }.to_json(*args)
+    }
   end
 
   def add_rental(person, date)
-    rental = Rental.new(person, self, date)
-    @rentals.push(rental) unless @rentals.include?(rental)
+    rental = Rental.new(person, to_json, date)
+    @rentals.push(rental.to_json) unless @rentals.include?(rental.to_json)
   end
 end
