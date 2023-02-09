@@ -23,7 +23,7 @@ class Rental
     book['rentals'].push(to_json) unless book['rentals'].include?(to_json)
   end
 
-  def to_json(*args)
+  def to_json(*_args)
     {
       'author' => @book['author'],
       'book' => @book['title'],
@@ -42,7 +42,7 @@ class Book
     @rentals = []
   end
 
-  def to_json(*args)
+  def to_json(*_args)
     {
       'title' => @title,
       'author' => @author,
