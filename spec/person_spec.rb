@@ -2,7 +2,6 @@ require 'rspec'
 require_relative '../association'
 require_relative '../person'
 
-
 describe Person do
   before :each do
     @person = Person.new('Abel', 27, true)
@@ -30,7 +29,6 @@ describe do
     @capital_decorator = CapitalizeDecorator.new(@person)
     @trimmer_decorator = TrimmerDecorator.new(@person)
   end
-
 
   it 'Test #correct_name for BaseDecorator' do
     expect(@base_decorator.correct_name).to eq 'yonas_is_the_best_coder_ever'
