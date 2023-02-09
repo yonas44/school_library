@@ -13,7 +13,7 @@ end
 def store_book(book)
   books = fetch_books
 
-  books << book.to_json
+  books << JSON.generate(book.to_json)
 
   File.write('./store/books.json', JSON.generate(books), mode: 'w')
 end
@@ -21,7 +21,7 @@ end
 def store_people(person)
   people = fetch_people
 
-  people << person.to_json
+  people << JSON.generate(person.to_json)
 
   File.write('./store/people.json', JSON.generate(people), mode: 'w')
 end
@@ -34,7 +34,7 @@ end
 
 def store_rentals(rental, book_index, person_index)
   rentals = File.open('./store/rentals.json', 'r') { |line| JSON.parse(line.read) }
-  rentals << rental.to_json
+  rentals << JSON.generate(rental.to_json)
 
   File.write('./store/rentals.json', JSON.generate(rentals), mode: 'w')
 

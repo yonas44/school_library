@@ -22,7 +22,7 @@ class Person < Nameable
       'age' => @age,
       'parent_permission' => @parent_permission,
       'rentals' => @rentals
-    }.to_json(*args)
+    }
   end
 
   private
@@ -45,7 +45,7 @@ class Person < Nameable
 
   def add_rental(book, date)
     rental = Rental.new(self, book, date)
-    @rentals.push(rental) unless @rentals.include?(rental)
+    @rentals.push(rental.to_json) unless @rentals.include?(rental.to_json)
   end
 end
 
@@ -73,3 +73,7 @@ class TrimmerDecorator < BaseDecorator
     @nameable.correct_name
   end
 end
+
+base = Person.new('yonas', 25, true)
+decorator = CapitalizeDecorator.new(base)
+puts decorator.correct_name
