@@ -24,7 +24,7 @@
 - [🙏 Acknowledgements](#acknowledgements)
 - [📝 License](#license)
 
-# 📖 Enumerable <a name="about-project"></a>
+# 📖 School library <a name="about-project"></a>
 
 In this repo we built a school library app using Ruby following `Object Oriented Programming` principles, that can be accessed in the terminal.
 
@@ -87,6 +87,7 @@ Clone this repository to your desired folder:
 To run the project, execute the following command:
 
 1. Run `bundle install`
+2. Run `ruby main.rb` in your terminal
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
